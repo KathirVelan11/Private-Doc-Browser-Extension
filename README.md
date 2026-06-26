@@ -60,13 +60,24 @@ pip install -r requirements.txt
 > First run downloads the embedding model once (ChromaDB's bundled ONNX
 > all-MiniLM-L6-v2, ~80 MB). No PyTorch, no GPU, no API keys.
 
-**b) Ollama** — this is a separate app, *not* a pip package. Install it from
-<https://ollama.com/download>, then pull at least one model:
+**b) Ollama** — this is a separate app, *not* a pip package. It runs the local
+language model that generates answers.
+
+*Download & install* from the official site: <https://ollama.com/download>
+- **Windows:** download `OllamaSetup.exe` and run it. Ollama then starts
+  automatically and runs in the background (system tray).
+- **macOS:** download the `.dmg`, drag Ollama to Applications, and launch it.
+- **Linux:** `curl -fsSL https://ollama.com/install.sh | sh`
+
+Verify it's installed, make sure it's serving, and pull at least one model:
 ```
-ollama serve                # usually already running after install
+ollama --version            # confirms the install
+ollama serve                # usually already running after install; skip if so
 ollama pull qwen2.5:7b      # good default (needs ~5 GB free RAM)
 ollama pull qwen2.5:0.5b    # tiny fallback for low-memory machines
 ```
+The backend talks to Ollama at `http://127.0.0.1:11434` (its default). Override
+with the `PDB_OLLAMA_URL` env var if you changed it.
 
 **c) A Chromium browser** — Chrome or Edge, to load the extension (step 3).
 
