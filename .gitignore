@@ -1,0 +1,4 @@
+# Local index, uploads and caches — user data, never commit.
+backend/data/
+__pycache__/
+*.pyc

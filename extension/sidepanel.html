@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Private Doc</title>
+    <link rel="stylesheet" href="sidepanel.css" />
+  </head>
+  <body>
+    <header>
+      <div class="brand">
+        <span class="dot" id="status-dot" title="backend status"></span>
+        <strong>Private&nbsp;Doc</strong>
+        <span class="sub">local &amp; private</span>
+      </div>
+      <select id="model" title="Local Ollama model"></select>
+    </header>
+
+    <nav class="tabs">
+      <button class="tab active" data-tab="chat">Chat</button>
+      <button class="tab" data-tab="knowledge">Knowledge</button>
+    </nav>
+
+    <!-- CHAT -->
+    <section id="tab-chat" class="panel">
+      <div id="messages" class="messages">
+        <div class="empty" id="empty-hint">
+          Select text on any page → right-click →
+          <em>“Ask Private AI”</em>, or just type below.
+        </div>
+      </div>
+      <div class="composer">
+        <label class="rag-toggle">
+          <input type="checkbox" id="use-rag" checked /> use my documents
+        </label>
+        <div class="row">
+          <textarea id="input" rows="2" placeholder="Ask anything…"></textarea>
+          <button id="send" title="Send (Enter)">➤</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- KNOWLEDGE -->
+    <section id="tab-knowledge" class="panel hidden">
+      <div class="card">
+        <h3>Upload documents</h3>
+        <p class="hint">PDF, DOCX, PPTX, TXT, MD, HTML, CSV.</p>
+        <input type="file" id="files" multiple />
+        <button id="upload">Add to knowledge</button>
+        <div id="upload-status" class="status"></div>
+      </div>
+
+      <div class="card">
+        <h3>Import bookmarks</h3>
+        <p class="hint">
+          Index your browser bookmarks so the assistant learns from what you
+          save.
+        </p>
+        <label class="rag-toggle">
+          <input type="checkbox" id="fetch-pages" /> also fetch &amp; read page
+          text (slower)
+        </label>
+        <button id="import-bm">Import all bookmarks</button>
+        <div id="bm-status" class="status"></div>
+      </div>
+
+      <div class="card">
+        <h3>Indexed knowledge</h3>
+        <div id="doc-list" class="doc-list">—</div>
+        <button id="reset" class="danger">Clear everything</button>
+      </div>
+    </section>
+
+    <script src="sidepanel.js"></script>
+  </body>
+</html>
