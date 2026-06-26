@@ -45,16 +45,30 @@ Browser extension (MV3)                 Local backend (Flask, 127.0.0.1:5000)
 ## Setup
 
 ### 1. Prerequisites
-- **Python 3.10+** with the backend deps (already present on this machine):
-  ```
-  pip install -r backend/requirements.txt
-  ```
-- **Ollama** running with at least one model:
-  ```
-  ollama serve
-  ollama pull qwen2.5:7b      # good default (needs ~5 GB free RAM)
-  ollama pull qwen2.5:0.5b    # tiny fallback for low-memory machines
-  ```
+
+You need three things. Only the middle one is pure Python.
+
+**a) Python 3.10+** — then install the backend dependencies (Flask, ChromaDB,
+pypdf, etc.). A virtual environment is recommended:
+```
+cd backend
+python -m venv .venv
+# Windows:        .venv\Scripts\activate
+# macOS / Linux:  source .venv/bin/activate
+pip install -r requirements.txt
+```
+> First run downloads the embedding model once (ChromaDB's bundled ONNX
+> all-MiniLM-L6-v2, ~80 MB). No PyTorch, no GPU, no API keys.
+
+**b) Ollama** — this is a separate app, *not* a pip package. Install it from
+<https://ollama.com/download>, then pull at least one model:
+```
+ollama serve                # usually already running after install
+ollama pull qwen2.5:7b      # good default (needs ~5 GB free RAM)
+ollama pull qwen2.5:0.5b    # tiny fallback for low-memory machines
+```
+
+**c) A Chromium browser** — Chrome or Edge, to load the extension (step 3).
 
 ### 2. Start the backend
 ```
